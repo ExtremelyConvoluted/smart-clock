@@ -1,20 +1,20 @@
 import Head from 'next/head'
-import Header from '@components/Header'
+
+import Clock from '@components/Clock'
 import Footer from '@components/Footer'
+import News from '@components/News'
 
 export default function Home() {
   return (
     <div className="container">
       <Head>
-        <title>Next.js Starter!</title>
+        <title>Clock</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main>
-        <Header title="Welcome to my app!" />
-        <p className="description">
-          Get started by editing <code>pages/index.js</code>
-        </p>
+        <Clock />
+        <News />
       </main>
 
       <Footer />
