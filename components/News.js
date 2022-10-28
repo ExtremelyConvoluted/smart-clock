@@ -18,7 +18,7 @@ function pickRandom(arr) {
 
 export default function News() {
 
-    const CORS_PROXY = "https://cors-anywhere.herokuapp.com/"
+    const CORS_PROXY = "https://cors-proxy-r26g.onrender.com/"
 
     const [title, setTitle] = useState([]);
     
