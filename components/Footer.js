@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <>
       <footer className={styles.footer}>
-        Made with <img src="/netliheart.svg" alt="Netlify Logo" className={styles.logo} /> for you
+        <p id="settingsText" onClick={ () => alert(1) }>Settings</p>
       </footer>
     </>
   )
