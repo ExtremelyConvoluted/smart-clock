@@ -1,21 +1,30 @@
 {
-  "name": "next-netlify-starter",
-  "version": "0.5.0",
-  "private": true,
+  "name": "nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "export": "next export"
+    "start": "next start",
+    "lint": "next lint"
   },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "axios": "^1.1.2",
-    "cors": "^2.8.5",
-    "cypress": "^10.0.3",
-    "htmlparser2": "^8.0.1",
-    "next": "^12.1.5",
-    "node-fetch": "^3.2.10",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "rss-parser": "^3.12.0"
+    "@types/node": "^18.0.6",
+    "autoprefixer": "^9.8.8",
+    "next": "^13.2.4",
+    "node-fetch": "^3.2.6",
+    "postcss-import": "^15.1.0",
+    "react": "^18.2.0",
+    "rss-parser": "^3.12.0",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17"
+  },
+  "devDependencies": {
+    "eslint": "8.36.0",
+    "eslint-config-next": "13.2.4",
+    "postcss": "^8.4.21"
   }
 }

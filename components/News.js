@@ -2,56 +2,54 @@ const Parser = require('rss-parser');
 
 import { useState, useEffect } from 'react';
 
-import styles from "./News.module.css";
-
 function shortened(title) {
-    if (title.length > 101) {
-        return title.slice(0, 98) + "..."
-    } else {
-        return title
-    }
+  if (title.length > 101) {
+    return title.slice(0, 98) + "..."
+  } else {
+    return title
+  }
 }
 
 function pickRandom(arr) {
-    return arr[Math.floor(Math.random() * arr.length)]
+  return arr[Math.floor(Math.random() * arr.length)]
 }
 
 export default function News() {
 
-    const CORS_PROXY = "https://cors-proxy-czku.onrender.com/"
+  const CORS_PROXY = "https://cors-proxy-czku.onrender.com/"
 
-    const [title, setTitle] = useState([]);
-    
-    useEffect(() => {
-        const id = setInterval(() => {
-                async function getFeed() {
+  const [title, setTitle] = useState([]);
 
-                    try {
-                        const res = await new Parser().parseURL(
-                            CORS_PROXY + "http://feeds.bbci.co.uk/news/rss.xml"
-                        );
+  useEffect(() => {
+    const id = setInterval(() => {
+      async function getFeed() {
 
-                        setTitle(
-                            shortened(
-                                pickRandom(res.items.map(
-                                        item => item.title
-                                    )
-                                )
-                            )
-                        );
-                    } catch (err) {
-                        console.log(err);
-                    }
-                }
+        try {
+          const res = await new Parser().parseURL(
+            CORS_PROXY + "http://feeds.bbci.co.uk/news/rss.xml"
+          );
 
-                getFeed()
-            }, 10000);
-        return () => clearInterval(id);
-    }, [title]);
+          setTitle(
+            shortened(
+              pickRandom(res.items.map(
+                item => item.title
+              )
+              )
+            )
+          );
+        } catch (err) {
+          console.log(err);
+        }
+      }
 
-    return (
-        <div className={styles.news}>
-            {title}
-        </div>
-    )
+      getFeed()
+    }, 10000);
+    return () => clearInterval(id);
+  }, [title]);
+
+  return (
+    <div className="text-3xl">
+      {title}
+    </div>
+  )
 }
