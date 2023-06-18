@@ -1,5 +1,3 @@
-const Parser = require('rss-parser');
-
 import { useState, useEffect } from 'react';
 
 function shortened(title) {
@@ -14,36 +12,20 @@ function pickRandom(arr) {
   return arr[Math.floor(Math.random() * arr.length)]
 }
 
-export default function News() {
-
-  const CORS_PROXY = "https://cors-proxy-czku.onrender.com/"
-  // const CORS_PROXY = "https://cors-anywhere.herokuapp.com/"
+export default function News({feed}) {
 
   const [title, setTitle] = useState([]);
 
   useEffect(() => {
     const id = setInterval(() => {
-      async function getFeed() {
-
-        try {
-          const res = await new Parser().parseURL(
-            CORS_PROXY + "http://feeds.bbci.co.uk/news/rss.xml"
-          );
-
-          setTitle(
-            shortened(
-              pickRandom(res.items.map(
-                item => item.title
-              )
-              )
-            )
-          );
-        } catch (err) {
-          console.log(err);
-        }
-      }
-
-      getFeed()
+      setTitle(
+        shortened(
+          pickRandom(feed.items.map(
+            item => item.title
+          )
+          )
+        )
+      );
     }, 10000);
     return () => clearInterval(id);
   }, [title]);
