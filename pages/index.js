@@ -1,25 +1,7 @@
-import Head from 'next/head'
+import Head from 'next/head';
 
-import Clock from '@components/Clock'
-import News from '@components/News'
-
-const Parser = require('rss-parser');
-
-export const getStaticProps = async () => {
-  try {
-    const res = await new Parser().parseURL(
-      "http://feeds.bbci.co.uk/news/world/rss.xml"
-    );
-    
-    console.log(res);
-
-    return {
-      props: {feed: res}
-    }
-  } catch (err) {
-    console.log(err);
-  }
-}
+import Clock from '@components/Clock';
+import News from '@components/News';
 
 export default function Home({ feed }) {
   return (
@@ -32,9 +14,9 @@ export default function Home({ feed }) {
       </div>
 
       <div className="flex flex-col space-y-12 items-center justify-center h-screen text-center text-indigo-100">
-          <Clock />
-          <News feed={feed} />
+        <Clock />
+        <News feed={feed} />
       </div>
     </div>
-  )
+  );
 }
