@@ -1,17 +1,10 @@
 import { useState, useEffect } from 'react';
 
-function shortened(title) {
-  if (title.length > 101) {
-    return `${title.slice(0, 98)}...`;
-  }
-  return title;
-}
-
 function pickRandom(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
-export default function News({ feed, random }) {
+export default function News() {
   const [title, setTitle] = useState([]);
 
   useEffect(() => {
@@ -20,10 +13,8 @@ export default function News({ feed, random }) {
         .then(res => res.json())
         .then(res => {
           setTitle(
-            shortened(
-              pickRandom(res.feed.items.map(
-                (item) => item.title,
-              )),
+            pickRandom(
+              res.feed.items.map(item => item.title)
             ),
           );
         })
@@ -32,7 +23,7 @@ export default function News({ feed, random }) {
   }, [title]);
 
   return (
-    <div className="text-3xl">
+    <div className="text-3xl max-w-4xl">
       {title}
     </div>
   );
