@@ -12,6 +12,16 @@ const monthsOfYear = [
   'November', 'December'
 ]
 
+async function getWeather () {
+  const res = await fetch('/api/weather')
+
+  if (res.ok) {
+    const data = await res.json()
+
+    return data
+  }
+}
+
 export default function Clock () {
   // Gets time and date
   const [date, setDate] = useState(new Date())
@@ -28,13 +38,11 @@ export default function Clock () {
   const [weather, setWeather] = useState()
 
   useEffect(() => {
-    const id = setInterval(() => {
-      fetch('/api/weather')
-        .then(res => res.json())
-        .then(res => setWeather(res.data))
-    }, 10000)
-    return () => clearInterval(id)
-  }, [weather])
+    (function updateWeather () {
+      getWeather().then(res => setWeather(res.data))
+      setTimeout(updateWeather, 10000)
+    }())
+  }, [])
 
   return (
     <div className="relative flex flex-col space-y-12 items-center">

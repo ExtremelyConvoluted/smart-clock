@@ -1,9 +1,9 @@
-import Head from 'next/head';
+import Head from 'next/head'
 
-import Clock from '@components/Clock';
-import News from '@components/News';
+import Clock from '@components/Clock'
+import News from '@components/News'
 
-export default function Home({ feed }) {
+export default function Home ({ feed }) {
   return (
     <div className="bg-gradient-to-r from-red-600 to-indigo-900">
       <div>
@@ -18,5 +18,5 @@ export default function Home({ feed }) {
         <News feed={feed} />
       </div>
     </div>
-  );
+  )
 }
