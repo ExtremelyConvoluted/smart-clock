@@ -19,16 +19,15 @@ export default function News () {
     getTitles()
       .then(res => {
         setTitle(
-          res.feed.items.map(item => item.title).join('\t\t\t')
+          res.feed.items.map(item => item.title).join('            ')
         )
       })
   }, [])
 
   return (
     <div className="w-2/3">
-      <Marquee className="text-3xl h-full" speed="70" onCycleComplete={() => { getTitles() }}>
-        <pre className="font-sans">
-          {title}          </pre>
+      <Marquee className="text-3xl overflow-visible" speed="70" onCycleComplete={() => { getTitles() }}>
+        <pre className="font-sans">{title}            </pre>
       </Marquee>
     </div>
   )
