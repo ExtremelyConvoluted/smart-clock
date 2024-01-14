@@ -2,7 +2,15 @@ import { useState, useEffect } from 'react'
 
 import Marquee from 'react-fast-marquee'
 
-async function getTitles () {
+function shuffle (unshuffled) {
+  const shuffled = unshuffled.map(value => ({ value, sort: Math.random() }))
+    .sort((a, b) => a.sort - b.sort)
+    .map(({ value }) => value)
+
+  return shuffled
+}
+
+async function fetchTitles () {
   const res = await fetch('/api/feed')
 
   if (res.ok) {
@@ -13,21 +21,24 @@ async function getTitles () {
 }
 
 export default function News () {
-  const [title, setTitle] = useState([])
+  const [title, setTitle] = useState('')
 
-  useEffect(() => {
-    getTitles()
+  async function getTitles () {
+    fetchTitles()
       .then(res => {
         setTitle(
-          res.feed.items.map(item => item.title).join('            ')
+          shuffle(res.feed.rss.channel.item.map(item => item.title))
+            .join('\t\t\t\t\t\t')
         )
       })
-  }, [])
+  }
+
+  useEffect(() => { getTitles() }, [])
 
   return (
     <div className="w-2/3">
-      <Marquee className="text-3xl overflow-visible" speed="70" onCycleComplete={() => { getTitles() }}>
-        <pre className="font-sans">{title}            </pre>
+      <Marquee className="text-3xl" speed="70" onCycleComplete={() => { getTitles() }}>
+        <pre className="font-sans overflow-visible">{title}</pre>
       </Marquee>
     </div>
   )
