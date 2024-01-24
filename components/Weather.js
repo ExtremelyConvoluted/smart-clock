@@ -18,13 +18,21 @@ export default function Weather () {
   async function getWeather () {
     fetchWeather()
       .then(res => {
+        console.log('New got')
         setLocalTemp(Math.round(res.data.main.temp - 273).toString())
         setIconCode(res.data.weather['0'].icon)
         setIconDescription(res.data.weather['0'].description)
       })
   }
 
-  useEffect(() => { getWeather() }, [])
+  useEffect(() => {
+    getWeather()
+    const id = setInterval(() => {
+      getWeather()
+    }, 600000)
+
+    return () => clearInterval(id)
+  }, [])
 
   return (
     <div className="flex space-x-6">
