@@ -28,7 +28,7 @@ export default function News () {
       .then(res => {
         setTitle(
           shuffle(res.feed.rss.channel.item.map(item => item.title))
-            .join('\t\t\t\t\t\t')
+          .join('\t\t\t\t\t\t')
         )
       })
   }
